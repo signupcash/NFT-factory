@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Signup from '@signupcash/provider';
-import { Button, ThemeProvider } from 'theme-ui';
+import { Button } from 'theme-ui';
 
 class Auth extends Component { 
   continue = e => {
@@ -13,8 +13,8 @@ class Auth extends Component {
     signup.requestAccess(["bch_address", "cash_account"])
     .then(({cashAccount, bchAddr}) => {
       // logged in
-      console.log(cashAccount, bchAddr);
-      values.bchAddr = bchAddr;
+      //console.log(cashAccount, bchAddr);
+      
       console.log(values);
       this.continue();
     });
@@ -22,13 +22,14 @@ class Auth extends Component {
 
   render() { 
     return (
-      <ThemeProvider>
-        <Button
+        <Button sx={{
+          color: 'primary',
+          bg: '#6D28D9'
+        }}
           onClick={this.login}
         >
-          Login with Singup
+          Login with SIGNUP
         </Button>
-      </ThemeProvider>
     )
   }
 }

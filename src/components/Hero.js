@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Auth from './Auth';
+import Child from './Child';
 import Parent from './Parent';
+import Success from './Success';
 
 export class Hero extends Component {
   state = {
@@ -11,6 +13,11 @@ export class Hero extends Component {
     groupName: '',
     parentImg: '',
     groupInitialQuantity: 0,
+    childTicker: '',
+    childName: '',
+    childImg: '',
+    mintNumbers: 0,
+    mintValid: false
   }
 
   // Proceed to Next Step
@@ -18,6 +25,13 @@ export class Hero extends Component {
     const { step } = this.state;
     this.setState({
       step: step + 1
+    });
+  };
+
+  prevStep = () => {
+    const { step } = this.state;
+    this.setState({
+      step: step - 1
     });
   };
 
@@ -34,7 +48,12 @@ export class Hero extends Component {
       groupTicker, 
       groupName, 
       parentImg, 
-      groupInitialQuantity 
+      groupInitialQuantity,
+      childTicker,
+      childName,
+      childImg,
+      mintNumbers,
+      mintValid
     } = this.state;
     
     const values = {
@@ -43,7 +62,12 @@ export class Hero extends Component {
       groupTicker, 
       groupName, 
       parentImg, 
-      groupInitialQuantity 
+      groupInitialQuantity,
+      childTicker,
+      childName,
+      childImg,
+      mintNumbers,
+      mintValid
     }
 
     switch(step) {
@@ -65,11 +89,18 @@ export class Hero extends Component {
         );
       case 2: 
         return (
-          <h2>Child NFT</h2>
+          <Child
+            nextStep={this.nextStep}
+            handleChange={this.handleChange}
+            values={values}
+          />
         );
       case 3:
         return (
-          <h2>Success</h2>
+          <Success
+            prevStep={this.prevStep}
+            values={values}
+          />
         );
       default:
         return (
