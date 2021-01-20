@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import Signup from '@signupcash/provider';
-import { Button } from 'theme-ui';
+import { 
+  Box, 
+  Button, 
+  Text, 
+  Container, 
+  Heading, 
+  ThemeProvider,
+} from 'theme-ui';
+import theme from './theme';
 
 class Auth extends Component { 
   continue = e => {
@@ -22,14 +30,57 @@ class Auth extends Component {
 
   render() { 
     return (
-        <Button sx={{
-          color: 'primary',
-          bg: '#6D28D9'
-        }}
-          onClick={this.login}
-        >
-          Login with SIGNUP
-        </Button>
+      <ThemeProvider theme={theme}>
+        <Container sx={{ position: 'relative' }}>
+          <Heading sx={{
+            mt: 4,
+            mr: 6,
+            ml: 4,
+            pt: 4,
+            display: 'flex',
+          }}
+          >
+            <Text sx={{
+              p: 4,
+              textAlign: 'left',
+              fontSize: '4vw',
+              fontWeight: 'bolder',
+              fontFamily: 'system-ui, sans-serif',
+              letterSpacing: 0.5,
+            }}>
+              Create your own NFT with signup NFT Factory
+            </Text>
+          </Heading>
+          <Box sx={{
+            mx: '40%',
+            my: 2,
+            p: 4,
+            display: 'flex'
+          }}>
+            <Button sx={{
+              fontSize: '20px',
+              appearance: 'none',
+              display: 'flex',
+              textAlign: 'center',
+              justifyContent: 'center',
+              lineHeight: 'inherit',
+              textDecoration: 'none',
+              fontFamily: 'inherit',
+              flex: 1,
+              mx: 'auto',
+              px: 3,
+              py: 2,
+              border: 0,
+              borderRadius: 8,
+              variant: 'buttons.primary',
+            }}
+            onClick={this.login}
+            >
+              Login with SIGNUP
+            </Button>
+          </Box>
+        </Container>
+      </ThemeProvider>
     )
   }
 }
