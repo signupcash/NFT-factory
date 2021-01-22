@@ -1,78 +1,71 @@
-import React, { Component } from 'react'
+import React from 'react';
 import {
   Box,
-  Text,
-  Label,
-  Input,
   Button,
-  Select
+  Container,
+  Field,
+  ThemeProvider
 } from 'theme-ui';
+import theme from './theme';
 
-class Child extends Component {
-  continue = e => {
-    e.preventDefault();
-    this.props.nextStep();
-  };
+const Child = ({ formData, setForm, navigation }) => {
+  const { childTicker, childName, childImg, childInitialQuantity } = formData;
+  console.log(childTicker);
 
-  render() {
-    const { values, handleChange } = this.props;
-    return (
-      <div>
-        <Box
-        as='form'
-        >
-          <Text>Create NFT Child</Text>
-          <Label htmlFor='childTicker'>Ticker</Label>
-          <Input
-            name='childTicker'
-            type='text'
-            mb={3}
-            required
-            onChange={handleChange('childTicker')}
-            defaultValue={values.childTicker}
-          />
-          <Label htmlFor='childName'>Name</Label>
-          <Input
-            name='childName'
-            type='text'
-            mb={3}
-            required
-            onChange={handleChange('childName')}
-            defaultValue={values.childName}
-          />
-          <Label htmlFor='childImg'>Image Upload</Label>
-          <Input
-            name='childImg'
-            type='file'
-            mb={3}
-            required
-            onChange={handleChange('childImg')}
-            defaultValue={values.childImg}
-          />
-          <Select
-            defaultValue={values.groupName}
-          >
-            <option>{values.groupName}</option>
-          </Select>
-          <Label htmlFor='mintNumbers'>Numbers to Mint</Label>
-          <Input
-            name='mintNumbers'
-            type='number'
-            required min='1'
-            mb={3}
-            onChange={handleChange('mintNumbers')}
-            defaultValue={values.mintNumbers}
-          />
-          <Button sx={{
-            color: 'primary',
-            bg: '#6D28D9'
-          }}
-            onClick={this.continue}
-          >Mint</Button>
+  return (
+    <ThemeProvider theme={ theme }>
+      <Container as='form' p={4} sx={{
+        maxWidth: '720px',
+        m: '0 auto',
+        textAlign: 'center'
+      }}>
+        <h2 sx={{ variant: theme.styles.h2 }}>Create NFT Child Elements</h2>
+        <Box sx={{
+          p: 2,
+          borderRadius: 4,
+          boxShadow: '0 0 4px 1px rgba(0, 0, 0, 0.5)'
+        }}>
+          <Box m={2}>
+            <Field
+              label='Ticker'
+              name='childTicker'
+              defaultValue={childTicker}
+              onChange={setForm}
+              mb={3}
+              aria-autocomplete='none'
+            />
+            <Field
+              label='Name'
+              name='childName'
+              defaultValue={childName}
+              mb={3}
+              aria-autocomplete='none'
+            />
+            <Field
+              label='Image'
+              name='childImg'
+              defaultValue={childImg}
+              mb={3}
+              aria-autocomplete='none'
+            />
+            <Field
+              label='Initial Quanitiy'
+              name='childInitialQuantity'
+              defaultValue={childInitialQuantity}
+              aria-autocomplete='none'
+            />
+            <Button
+              variant='buttons.primary' 
+              my={3}
+              onClick={() => navigation.next()}
+            >
+              Create
+            </Button>
+          </Box>
         </Box>
-      </div>
-    )
-  }
+      </Container>
+    </ThemeProvider>
+  )
 }
 
 export default Child;

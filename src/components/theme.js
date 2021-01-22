@@ -10,6 +10,15 @@
     primary: '#6d66FF',
     secondary: '#6d90ff'
   },
+  fontWeights: {
+    body: 400,
+    heading: 700,
+    bold: 800,
+  },
+  lineHeights: {
+    body: 1.5,
+    heading: 1.125
+  },
   links: {
     nav: {
       px: 2,
@@ -23,6 +32,14 @@
       '&:hover': {
         bg: 'secondary'
       }
+    }
+  },
+  styles: {
+    h2: {
+      fontFamily: 'monospace',
+      fontWeight: 'monospace',
+      lineHeight: 'monospace',
+      fontSize: 20,
     }
   }
 }

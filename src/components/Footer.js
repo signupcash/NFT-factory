@@ -17,15 +17,15 @@ export class Footer extends Component {
         <Flex 
           bg='primary'
           sx={{
-          fontSize: 1,
-          variant: 'styles.footer',
-          px: 4,
-          pb: 4,
-          backgroundColor: '#e5e7eb',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center'
-        }}>
+            mt: 5,
+            fontSize: 1,
+            variant: 'styles.footer',
+            py: 4,
+            backgroundColor: '#e5e7eb',
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center'
+          }}>
           <Grid
             gap={'10vw'}
             columns={[ 2, null, 4 ]}
