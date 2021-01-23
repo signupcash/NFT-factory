@@ -38,6 +38,7 @@ const Child = ({ formData, setForm, navigation }) => {
               label='Name'
               name='childName'
               defaultValue={childName}
+              onChange={setForm}
               mb={3}
               aria-autocomplete='none'
             />
@@ -45,6 +46,7 @@ const Child = ({ formData, setForm, navigation }) => {
               label='Image'
               name='childImg'
               defaultValue={childImg}
+              onChange={setForm}
               mb={3}
               aria-autocomplete='none'
             />
@@ -52,6 +54,7 @@ const Child = ({ formData, setForm, navigation }) => {
               label='Initial Quanitiy'
               name='childInitialQuantity'
               defaultValue={childInitialQuantity}
+              onChange={setForm}
               aria-autocomplete='none'
             />
             <Button

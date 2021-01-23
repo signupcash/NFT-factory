@@ -40,6 +40,12 @@
       fontWeight: 'monospace',
       lineHeight: 'monospace',
       fontSize: 20,
+    },
+    heading: {
+      fontFamily: 'body',
+      fontWeight: 'heading',
+      lineHeight: 'heading',
+      fontSize: 30
     }
   }
 }

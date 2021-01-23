@@ -1,15 +1,62 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Signup from '@signupcash/provider';
 import { 
   Box, 
   Button, 
+  Container,
   Text, 
-  Container, 
-  Heading, 
   ThemeProvider,
 } from 'theme-ui';
 import theme from './theme';
 
+const Auth = ({ formData, setForm, navigation }) => {
+  const { bchAddress, cashAcc } = formData;
+  const signup = new Signup.cash({ addrL: 'DEVELOPER BCH ADDRESS' });
+
+  function login(event) {
+    signup
+      .requestAccess(['bch_address', 'cash_account'])
+      .then(({ cashAccount, bchAddr }) => {
+        navigation.next();
+      })
+  }
+
+  return (
+    <ThemeProvider theme={ theme }>
+      <Container as='header' p={4}>
+        <Text sx={{
+          p: 4,
+          textAlign: 'left',
+          fontSize: '4vw',
+          fontWeight: 'bold',
+          fontFamily: 'system-ui, sans-serif',
+          letterSpacing: 0.5,
+        }}>
+          Create your own NFT with signup NFT Factory
+        </Text>
+        <Container as='div' p={4} sx={{
+          maxWidth: '720px',
+          m: '0 auto',
+          textAlign: 'center'
+        }}>
+          <Box m={2} p={2}>
+            <Button
+              variant='buttons.primary'
+              m={3}
+              onClick={() => login(signup)}
+            >
+              Login with SIGNUP
+            </Button>
+          </Box>
+        </Container>
+      </Container>
+    </ThemeProvider>
+  )
+}
+
+export default Auth;
+
+/*
 class Auth extends Component { 
   continue = e => {
     this.props.nextStep();
@@ -85,4 +132,4 @@ class Auth extends Component {
   }
 }
 
-export default Auth;
+export default Auth; */

@@ -6,6 +6,8 @@ import Parent from './Parent';
 import Success from './Success';
 
 const defaultData = {
+  bchAddress: '',
+  cashAcc: '',
   groupTicker: '',
   groupName: '',
   parentImg: '',
@@ -27,7 +29,7 @@ const Container = () => {
   const [formData, setForm] = useForm(defaultData);
   const { step, navigation } = useStep({
     steps,
-    initialStep: 1
+    initialStep: 0
   });
 
   const props = { formData, setForm, navigation };
@@ -39,17 +41,11 @@ const Container = () => {
       return <Parent { ...props } />
     case 'child':
       return <Child { ...props } />
-    /*case 'success':
-      return <Success  /> */
+    case 'success':
+      return <Success  { ...props }/> 
     default:
       return 'Invalid'
   }
-
-  return (
-    <div>
-      <h1>NFT Form</h1>
-    </div>
-  )
 }
 
 export default Container;
