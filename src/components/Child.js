@@ -10,7 +10,7 @@ import theme from './theme';
 
 const Child = ({ formData, setForm, navigation }) => {
   const { childTicker, childName, childImg, childInitialQuantity } = formData;
-  console.log(childTicker);
+  // console.log(childTicker);
 
   return (
     <ThemeProvider theme={ theme }>

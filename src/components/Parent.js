@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDropzone } from 'react-dropzone';
 import {
   Box,
   Button,
@@ -10,7 +11,15 @@ import theme from './theme';
 
 const Parent = ({ formData, setForm, navigation }) => {
   const { groupTicker, groupName, parentImg, groupInitialQuantity } = formData;
+  const { /*acceptedFiles,*/ getRootProps, getInputProps } = useDropzone();
   console.log(groupTicker);
+
+  /*const files = acceptedFiles.map(file => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
+  */
 
   return (
     <ThemeProvider theme={ theme }>
@@ -43,6 +52,17 @@ const Parent = ({ formData, setForm, navigation }) => {
               aria-autocomplete='none'
             />
             <Field
+              { ...getRootProps }
+              { ...getInputProps } 
+              label='Drag and Drop your NFT here, or click to select files'
+              name='parentImg'
+              defaultValue={parentImg}
+              onChange={setForm}
+              mb={3}
+              aria-autocomplete='none'
+            />
+            <Field
+              { ...getRootProps }
               label='Image'
               name='parentImg'
               defaultValue={parentImg}

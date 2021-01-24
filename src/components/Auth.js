@@ -10,14 +10,15 @@ import {
 import theme from './theme';
 
 const Auth = ({ formData, setForm, navigation }) => {
-  const { bchAddress, cashAcc } = formData;
+  //const { bchAddress, cashAcc } = formData;
   const signup = new Signup.cash({ addrL: 'DEVELOPER BCH ADDRESS' });
 
-  function login(event) {
+  function login(event, go) {
     signup
       .requestAccess(['bch_address', 'cash_account'])
       .then(({ cashAccount, bchAddr }) => {
-        navigation.next();
+        console.log(bchAddr, cashAccount);
+        go = navigation.next();
       })
   }
 
@@ -43,7 +44,7 @@ const Auth = ({ formData, setForm, navigation }) => {
             <Button
               variant='buttons.primary'
               m={3}
-              onClick={() => login(signup)}
+              onClick={() => login()}
             >
               Login with SIGNUP
             </Button>
