@@ -29,7 +29,7 @@ const Container = () => {
   const [formData, setForm] = useForm(defaultData);
   const { step, navigation } = useStep({
     steps,
-    initialStep: 0
+    initialStep: 1
   });
 
   const props = { formData, setForm, navigation };

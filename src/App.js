@@ -8,9 +8,8 @@ import Footer from './components/Footer';
 function App() {
   return (
     <div>
-      <Layout />
       <Route path="/" component={Container} />
-      <Footer />
+
     </div>
   )
 }

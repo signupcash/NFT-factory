@@ -17,7 +17,7 @@ export class Layout extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <Container p={4} bg='muted'>
+        <div p={4} bg='muted'>
           <Heading sx={{
             alignItems: 'center',
             display: 'flex'
@@ -87,7 +87,7 @@ export class Layout extends Component {
             m: 'auto',
             py: 3
           }} />
-        </Container>
+        </div>
       </ThemeProvider>
     )
   }
