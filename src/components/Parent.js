@@ -17,6 +17,7 @@ import theme from './theme';
 
 const Parent = ({ formData, setForm, navigation }) => {
   const { groupTicker, groupName, groupInitialQuantity } = formData;
+  console.log(formData)
 
   return (
     <ThemeProvider theme={ theme }>

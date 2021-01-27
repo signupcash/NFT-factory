@@ -1,8 +1,8 @@
 import React from 'react';
 import Signup from '@signupcash/provider';
-import { 
-  Box, 
+import {  
   Button, 
+  Card,
   Container,
   Text, 
   ThemeProvider,
@@ -10,46 +10,43 @@ import {
 import theme from './theme';
 
 const Auth = ({ formData, setForm, navigation }) => {
-  //const { bchAddress, cashAcc } = formData;
+  const { bchAddress } = formData;
   const signup = new Signup.cash({ addrL: 'DEVELOPER BCH ADDRESS' });
 
-  function login(event, go) {
-    signup
-      .requestAccess(['bch_address', 'cash_account'])
+  function login (e, formData) {
+    e.preventDefault();
+    signup.requestAccess(['bch_address', 'cash_account'])
       .then(({ cashAccount, bchAddr }) => {
         console.log(bchAddr, cashAccount);
-        go = navigation.next();
+        navigation.next();
       })
   }
 
   return (
     <ThemeProvider theme={ theme }>
-      <Container as='header' p={4}>
-        <Text sx={{
-          p: 4,
-          textAlign: 'left',
-          fontSize: '4vw',
-          fontWeight: 'bold',
-          fontFamily: 'system-ui, sans-serif',
-          letterSpacing: 0.5,
-        }}>
-          Create your own NFT with signup NFT Factory
-        </Text>
-        <Container as='div' p={4} sx={{
-          maxWidth: '720px',
-          m: '0 auto',
-          textAlign: 'center'
-        }}>
-          <Box m={2} p={2}>
-            <Button
-              variant='buttons.primary'
-              m={3}
-              onClick={() => login()}
+      <Container as='form'>
+        <Card variant='cards.secondary'>
+          <Text as='h2' variant='styles.h2' sx={{ fontSize: ['5vw'] }}>👾</Text>
+          <Text as='h2' variant='styles.h2'>Create your own NFT with signup</Text>
+          <Card 
+            variant='cards.secondary' 
+            sx={{ 
+              width: ['60px', '80px', '100px'], 
+              m: '0 auto'
+            }}
+          >
+            <Button 
+              variant='buttons.primary' 
+              sx={{ mt: '20%' }}
+              name='bchAddress'
+              defaultValue={bchAddress}
+              onChange={setForm}
+              onClick={login}
             >
-              Login with SIGNUP
+              Login
             </Button>
-          </Box>
-        </Container>
+          </Card>
+        </Card>
       </Container>
     </ThemeProvider>
   )

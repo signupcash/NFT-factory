@@ -153,6 +153,15 @@
       textShadow: 'text'
     },
   },
+  styles: {
+    h2: {
+      fontFamily: 'heading',
+      fontWeight: 'bold',
+      color: 'text',
+      fontSize: '4vw',
+      textAlign: 'center'
+    }
+  }
 }
 
 export default theme;
