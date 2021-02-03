@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropzone from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
 import { 
@@ -15,9 +15,35 @@ import {
 } from 'theme-ui';
 import theme from './theme';
 
-const Parent = ({ formData, setForm, navigation }) => {
-  const { groupTicker, groupName, groupInitialQuantity } = formData;
-  console.log(formData)
+const Parent = ({formData, setForm, navigation }) => {
+  const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({
+    accept: 'image/*',
+    multiple: false,
+    disabled: false,
+    onDrop: (acceptedFiles) => {
+      /*setParentImage(
+        acceptedFiles.map((upFile) => Object.assign(upFile, {
+          preview:URL.createObjectURL(upFile)
+        }))
+      ) */
+    }
+  })
+
+  const handleChange = e => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setForm(prevState => ({
+      ...prevState,
+      currentGroup: {
+        ...prevState.currentGroup,
+        [name]: value
+      }
+    }));
+  }
+
+  function handleClick() {
+    navigation.next();
+  }
 
   return (
     <ThemeProvider theme={ theme }>
@@ -30,39 +56,47 @@ const Parent = ({ formData, setForm, navigation }) => {
             <Label variant='forms.label'>Ticker</Label>
             <Input
               variant='forms.input'
-              name='groupTicker'
-              defaultValue={groupTicker}
-              onChange={setForm}
+              name='ticker'
+              defaultValue={formData.currentGroup.ticker}
+              onChange={handleChange}
             />
+            {console.log(formData)}
             <Label mt={3} variant='forms.label'>Name</Label>
             <Input
               variant='forms.input'
-              name='groupName'
-              defaultValue={groupName}
-              onChange={setForm}
+              name='name'
+              value={formData.currentGroup.name}
+              onChange={handleChange}
             />
             <Label mt={3} variant='forms.label'>NFT Parent Image</Label>
-            <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
-              {({getRootProps, getInputProps}) => (
-                <Box variant='boxs.dragndrop' {...getRootProps()}>
-                  <Input {...getInputProps()} />
-                  <FontAwesomeIcon icon={faCloudUploadAlt}/>
-                  <Text>Drag 'n' Drop Here</Text>
-                </Box>
-              )}
-            </Dropzone>
+            <Box variant='boxs.dragndrop' {...getRootProps()}>
+              <Input {...getInputProps()} />
+              {
+                isDragActive 
+                ? <Text>Drop Image Here</Text> 
+                : acceptedFiles
+                  ? <Text>
+                      <FontAwesomeIcon icon={faCloudUploadAlt}/>
+                      <br /> 
+                      Drag 'n' Drop Image Here
+                    </Text>
+                  : <div></div>
+              }
+            </Box>
             <Label mt={3} variant='forms.label'>Initial Quantity</Label>
             <Input
               variant='forms.input'
-              name='groupInitialQuantity'
+              name='initialQuantity'
               type='number'
-              defaultValue={groupInitialQuantity}
-              onChange={setForm}
+              value={formData.currentGroup.initialQuantity}
+              onChange={handleChange}
             />
+            {console.log(formData)}
             <Button
               mt={4} 
               variant='buttons.primary'
-              onClick={() => navigation.next()}
+              type='submit'
+              onClick={() => handleClick()}
             >
               Create
             </Button>
@@ -71,102 +105,6 @@ const Parent = ({ formData, setForm, navigation }) => {
       </Container>
     </ThemeProvider>
   )
-
-  /*return (
-    <ThemeProvider theme={theme}>
-      <Container as='form' p={4} sx={{
-        maxWidth: '720px',
-        m: '0 auto',
-        textAlign: 'center'
-      }}>
-        <h2 sx={{ variant: theme.styles.h2 }}>Create NFT Group Elements</h2>
-        <Box sx={{
-          p: 2,
-          borderRadius: '0, 0, 2, 2 black'
-        }}>
-          <Box m={2}>
-            <Text sx={{
-              fontSize: '20px',
-              marginTop: 3,
-              textAlign: 'left',
-              variant: theme.styles.text
-            }}>Ticker</Text>
-            <Field
-              name='groupTicker'
-              defaultValue={groupTicker}
-              onChange={setForm}
-              mb={3}
-              aria-autocomplete='none'
-            />
-            <Text sx={{
-              fontSize: '20px',
-              marginTop: 3,
-              textAlign: 'left'
-            }}>Name</Text>
-            <Field
-              name='groupName'
-              defaultValue={groupName}
-              onChange={setForm}
-              mb={3}
-              aria-autocomplete='none'
-            />
-            <Field mb={3}>
-              <Dropzone sx={{
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                p: '20px',
-                borderWidth: 2,
-                borderRadius: 2,
-                borderColor: '#eeeeee',
-                borderStyle: 'dashed',
-                backgroundColor: '#fafafa',
-                color: '#bdbdbd',
-                outline: 'none',
-                transition: 'border .24s ease-in-out'
-              }}>
-                {({getRootProps, getInputProps}) => (
-                  <div { ...getRootProps() }>
-                    <Text sx={{
-                      fontSize: '20px',
-                      marginTop: 3,
-                      textAlign: 'left'
-                    }}>Drag and Drop your NFT here, or click to select files</Text>
-                    <input { ...getInputProps() } 
-                      name='parentImg'
-                      defaultValue={parentImg}
-                      onChange={setForm}
-                      mb={3}
-                      aria-autocomplete='none'
-                    />
-                  </div>
-                )}
-              </Dropzone>
-            </Field>
-            <Text sx={{
-              fontSize: '20px',
-              marginTop: 3,
-              textAlign: 'left'
-            }}>Initial Quanitiy</Text>
-            <Field
-              name='groupInitialQuantity'
-              defaultValue={groupInitialQuantity}
-              onChange={setForm}
-              aria-autocomplete='none'
-            />
-            <Button
-              variant='buttons.primary' 
-              my={3}
-              onClick={() => navigation.next()}
-            >
-              Create
-            </Button>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
-  ) */
 } 
 
 export default Parent;

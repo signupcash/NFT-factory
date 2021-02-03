@@ -1,37 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
-  Box,
-  Text,
+  Card,
+  ThemeProvider,
+  Container,
+  Heading,
   Button
 } from 'theme-ui';
+import theme from './theme';
 
-export class Success extends Component {
-  /*
-  continue = e => {
-    e.preventDefault();
-    this.props.nextStep();
-  };
-  */
+const Success = ({ formData, navigation }) => {
+  const { go } = navigation;
 
-  render() {
-    const { values } = this.props;
-    return (
-      <div>
-        <Box
-        as='form'
-        >
-          <Text>Great! Your NFT is created!</Text>
-          {console.log(values)}
-          <Button sx={{
-            color: 'primary',
-            bg: '#6D28D9'
-          }}
-            onClick={'/'}
-          >Create another NFT child</Button>
-        </Box>
-      </div>
-    )
-  }
+  return (
+    <ThemeProvider theme={theme}>
+      <Container as='form'>
+        <Card varient='cards.primary'>
+          <Heading sx={{ pt: 4 }}>Great!</Heading>
+          <Heading sx={{ pb: 4 }}>Your NFT is created!</Heading>
+          <Card variant='cards.secondary'>
+            <Button
+              mt={2}
+              width='20%'
+              varient='buttons.primary'
+              onClick={() => go('child')}
+            >
+              Create another NFT Child
+            </Button>
+          </Card>
+        </Card>
+      </Container>
+    </ThemeProvider>
+  )
 }
 
 export default Success;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropzone from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
 import {
@@ -16,8 +16,44 @@ import {
 } from 'theme-ui';
 import theme from './theme';
 
-const Child = ({ formData, setForm, navigation }) => {
-  const { childTicker, childName, childInitialQuantity } = formData;
+const Child = ({formData, setForm, navigation }) => {
+
+  const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({
+    accept: 'image/*',
+    multiple: false,
+    disabled: false,
+    onDrop: (acceptedFiles) => {
+      /*setChildImage(
+        acceptedFiles.map((upFile) => Object.assign(upFile, {
+          preview:URL.createObjectURL(upFile)
+        }))
+      ) */
+    }
+
+    /* {childImage.map((upFile) => {
+                      return (
+                        <Card variant='cards.secondary'>
+                          <Image src={upFile.preview} alt='preview' />
+                        </Card>
+                        )
+                      })}
+                      */
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm(prevState => ({
+      ...prevState,
+      children: {
+        ...prevState.children,
+        [name]: value
+      }
+    }));
+  };
+
+  function handleClick() {
+    navigation.next();
+  }
 
   return (
     <ThemeProvider theme={ theme }>
@@ -30,47 +66,55 @@ const Child = ({ formData, setForm, navigation }) => {
             <Label variant='forms.label'>Ticker</Label>
             <Input
               variant='forms.input'
-              name='childTicker'
-              defaultValue={childTicker}
-              onChange={setForm}
+              name='ticker'
+              value={formData.children.ticker}
+              onChange={handleChange}
             />
             <Label mt={3} variant='forms.label'>Name</Label>
             <Input
               variant='forms.input'
-              name='childName'
-              defaultValue={childName}
-              onChange={setForm}
+              name='name'
+              defaultValue={formData.children.name}
+              onChange={handleChange}
             />
+            {console.log(formData)}
             <Label mt={3} variant='forms.label'>NFT Child Image</Label>
-            <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
-              {({getRootProps, getInputProps}) => (
-                <Box variant='boxs.dragndrop' {...getRootProps()}>
-                  <Input {...getInputProps()} />
-                  <FontAwesomeIcon icon={faCloudUploadAlt}/>
-                  <Text>Drag 'n' Drop Here</Text>
-                </Box>
-              )}
-            </Dropzone>
+            <Box variant='boxs.dragndrop' {...getRootProps()}>
+              <Input {...getInputProps()} />
+              {
+                isDragActive 
+                ? <Text>Drop Image Here</Text> 
+                : acceptedFiles
+                  ? <Text>
+                      <FontAwesomeIcon icon={faCloudUploadAlt}/>
+                      <br /> 
+                      Drag 'n' Drop Image Here
+                    </Text>
+                  : <div>
+                      
+                    </div>
+              }
+            </Box>
             <Label mt={3} variant='forms.label'>Group</Label>
             <Select 
               variant='forms.select'
               defaultValue='Test'
             >
-              <option>Test</option>
-              <option>Test2</option>
+              <option>{}</option>
             </Select>
             <Label mt={3} variant='forms.label'>Numbers to Mint</Label>
             <Input
               variant='forms.input'
-              name='childInitialQuantity'
+              name='mintQuantity'
               type='number'
-              defaultValue={childInitialQuantity}
-              onChange={setForm}
+              defaultValue={formData.children.mintQuantity}
+              onChange={handleChange}
             />
             <Button
               mt={4}
               variant='buttons.primary'
-              onClick={() => navigation.back()}
+              type='submit'
+              onClick={() => handleClick()}
             >
               Mint
             </Button>

@@ -1,13 +1,15 @@
-import React from 'react';
-import { useForm, useStep } from 'react-hooks-helper';
+import React, {useState} from 'react';
+import { useStep } from 'react-hooks-helper';
 import Auth from './Auth';
 import Child from './Child';
 import Parent from './Parent';
 import Success from './Success';
 
+/*
 const defaultData = {
   bchAddress: '',
   cashAcc: '',
+  groupID: '',
   groupTicker: '',
   groupName: '',
   parentImg: '',
@@ -17,6 +19,24 @@ const defaultData = {
   childImg: '',
   childInitialQuantity: ''
 };
+*/
+
+const nftData = {
+  bchAddress: '',
+  currentGroup: {            // current group --- one object
+    ticker: '',
+    name: '',
+    image: '',
+    initialQuantity: 0,
+  },
+  children: {               // children    ---- array group
+    ticker: '',
+    name: '',
+    groupName: '',        // disabled dropdown
+    image: '',
+    mintQuantity: ''
+  }
+}
 
 const steps = [
   { id: 'auth' },
@@ -26,10 +46,10 @@ const steps = [
 ]
 
 const Container = () => {
-  const [formData, setForm] = useForm(defaultData);
+  const [formData, setForm] = useState(nftData);
   const { step, navigation } = useStep({
     steps,
-    initialStep: 0
+    initialStep: 1
   });
 
   const props = { formData, setForm, navigation };

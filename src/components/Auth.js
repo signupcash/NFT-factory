@@ -9,15 +9,14 @@ import {
 } from 'theme-ui';
 import theme from './theme';
 
-const Auth = ({ formData, setForm, navigation }) => {
-  const { bchAddress } = formData;
+const Auth = ({formData, setForm, navigation }) => {
   const signup = new Signup.cash({ addrL: 'DEVELOPER BCH ADDRESS' });
 
-  function login (e, formData) {
+  function login (e) {
     e.preventDefault();
-    signup.requestAccess(['bch_address', 'cash_account'])
-      .then(({ cashAccount, bchAddr }) => {
-        console.log(bchAddr, cashAccount);
+    signup.requestAccess(['bch_address'])
+      .then(({ bchAddr }) => {
+        setForm({...formData, bchAddress: bchAddr});
         navigation.next();
       })
   }
@@ -38,9 +37,6 @@ const Auth = ({ formData, setForm, navigation }) => {
             <Button 
               variant='buttons.primary' 
               sx={{ mt: '20%' }}
-              name='bchAddress'
-              defaultValue={bchAddress}
-              onChange={setForm}
               onClick={login}
             >
               Login
