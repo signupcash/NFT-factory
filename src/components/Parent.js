@@ -1,5 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 import { useDropzone } from 'react-dropzone';
+import FormData from 'form-data';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
 import { 
@@ -14,18 +16,47 @@ import {
   ThemeProvider 
 } from 'theme-ui';
 import theme from './theme';
+import { pinataAPIKey, pinataSecretAPIKey } from '../config/keys';
 
 const Parent = ({formData, setForm, navigation }) => {
+  //let data = {};
+  const url = 'https://api.pinata.cloud/pinning/pinFileToIPFS';
+
   const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({
     accept: 'image/*',
     multiple: false,
+    maxFiles: 1,
     disabled: false,
     onDrop: (acceptedFiles) => {
-      /*setParentImage(
-        acceptedFiles.map((upFile) => Object.assign(upFile, {
-          preview:URL.createObjectURL(upFile)
+      let fd = new FormData();
+
+      acceptedFiles.map(file => {
+        return fd.append('file', file);
+      });
+
+      axios({
+        method: 'POST',
+        url: url,
+        data: fd,
+        headers: {
+          pinata_api_key: pinataAPIKey,
+          pinata_secret_api_key: pinataSecretAPIKey
+        }
+      })
+      .then((res) => {
+        const imageLink = `https://gateway.pinata.cloud/ipfs/${res.data.IpfsHash}`;
+        setForm(prevState => ({
+          ...prevState,
+          currentGroup: {
+            ...prevState.currentGroup,
+            image: imageLink
+          }
         }))
-      ) */
+        console.log(formData)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     }
   })
 

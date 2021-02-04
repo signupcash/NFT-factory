@@ -5,22 +5,6 @@ import Child from './Child';
 import Parent from './Parent';
 import Success from './Success';
 
-/*
-const defaultData = {
-  bchAddress: '',
-  cashAcc: '',
-  groupID: '',
-  groupTicker: '',
-  groupName: '',
-  parentImg: '',
-  groupInitialQuantity: '',
-  childTicker: '',
-  childName: '',
-  childImg: '',
-  childInitialQuantity: ''
-};
-*/
-
 const nftData = {
   bchAddress: '',
   currentGroup: {            // current group --- one object
