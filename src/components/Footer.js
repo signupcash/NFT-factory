@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   Text,
-  Link,
   ThemeProvider
 } from 'theme-ui';
 import theme from './theme';
