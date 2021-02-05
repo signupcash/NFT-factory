@@ -33,7 +33,7 @@ const Container = () => {
   const [formData, setForm] = useState(nftData);
   const { step, navigation } = useStep({
     steps,
-    initialStep: 1
+    initialStep: 0
   });
 
   const props = { formData, setForm, navigation };

@@ -20,6 +20,7 @@ const Success = ({ formData, navigation }) => {
           <Card variant='cards.secondary'>
             <Button
               mt={2}
+              mb={4}
               width='20%'
               varient='buttons.primary'
               onClick={() => go('child')}

@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import FormData from 'form-data';
 import { useDropzone } from 'react-dropzone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
@@ -15,29 +17,46 @@ import {
   ThemeProvider
 } from 'theme-ui';
 import theme from './theme';
+import { pinataAPIKey, pinataSecretAPIKey } from '../config/keys';
 
 const Child = ({formData, setForm, navigation }) => {
+  const url = 'https://api.pinata.cloud/pinning/pinFileToIPFS';
 
   const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({
     accept: 'image/*',
     multiple: false,
+    maxFiles: 1,
     disabled: false,
     onDrop: (acceptedFiles) => {
-      /*setChildImage(
-        acceptedFiles.map((upFile) => Object.assign(upFile, {
-          preview:URL.createObjectURL(upFile)
-        }))
-      ) */
-    }
+      let fd = new FormData();
 
-    /* {childImage.map((upFile) => {
-                      return (
-                        <Card variant='cards.secondary'>
-                          <Image src={upFile.preview} alt='preview' />
-                        </Card>
-                        )
-                      })}
-                      */
+      acceptedFiles.map(file => {
+        return fd.append('file', file);
+      });
+
+      axios({
+        method: 'POST',
+        url: url,
+        data: fd,
+        headers: {
+          pinata_api_key: pinataAPIKey,
+          pinata_secret_api_key: pinataSecretAPIKey
+        }
+      })
+      .then((res) => {
+        const imageLink = `https://gateway.pinata.cloud/ipfs/${res.data.IpfsHash}`;
+        setForm(prevState => ({
+          ...prevState,
+          children: {
+            ...prevState.children,
+            image: imageLink
+          }
+        }))
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
   })
 
   const handleChange = (e) => {
@@ -77,7 +96,6 @@ const Child = ({formData, setForm, navigation }) => {
               defaultValue={formData.children.name}
               onChange={handleChange}
             />
-            {console.log(formData)}
             <Label mt={3} variant='forms.label'>NFT Child Image</Label>
             <Box variant='boxs.dragndrop' {...getRootProps()}>
               <Input {...getInputProps()} />
@@ -98,9 +116,8 @@ const Child = ({formData, setForm, navigation }) => {
             <Label mt={3} variant='forms.label'>Group</Label>
             <Select 
               variant='forms.select'
-              defaultValue='Test'
             >
-              <option>{}</option>
+              <option>{formData.currentGroup.name}</option>
             </Select>
             <Label mt={3} variant='forms.label'>Numbers to Mint</Label>
             <Input
@@ -111,7 +128,7 @@ const Child = ({formData, setForm, navigation }) => {
               onChange={handleChange}
             />
             <Button
-              mt={4}
+              my={4}
               variant='buttons.primary'
               type='submit'
               onClick={() => handleClick()}

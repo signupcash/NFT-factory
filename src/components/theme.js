@@ -17,7 +17,6 @@
       borderStyle: 'solid',
       borderRadius: '10px',
       overflow: 'hidden',
-      zIndex: 1,
       justifyContent: 'center',
       alignItems: 'center',
     },
@@ -28,7 +27,6 @@
       borderColor: 'none',
       borderStyle: 'none',
       overflow: 'hidden',
-      zIndex: 1,
       justifyContent: 'center',
       alignItems: 'center',
     }
@@ -39,7 +37,6 @@
       bg: 'primary',
       '&:hover': {
         bg: 'secondary',
-        color: 'black',
       },
       cursor: 'pointer',
       display: 'flex',
@@ -136,6 +133,7 @@
       justifyContent: 'center',
       alignItems: 'center',
       minHeight: '100vh',
+      marginTop: '-6%'
     }
   },
   text: {
@@ -152,6 +150,13 @@
       color: 'primary',
       textShadow: 'text'
     },
+    footer: {
+      fontFamily: 'heading',
+      fontSize: ['10px', '12px', '14px'],
+      fontWeight: 'body',
+      textAlign: 'left',
+      color: 'grey'
+    }
   },
   styles: {
     h2: {

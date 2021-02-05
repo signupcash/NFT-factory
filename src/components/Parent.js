@@ -19,7 +19,6 @@ import theme from './theme';
 import { pinataAPIKey, pinataSecretAPIKey } from '../config/keys';
 
 const Parent = ({formData, setForm, navigation }) => {
-  //let data = {};
   const url = 'https://api.pinata.cloud/pinning/pinFileToIPFS';
 
   const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({
@@ -52,7 +51,6 @@ const Parent = ({formData, setForm, navigation }) => {
             image: imageLink
           }
         }))
-        console.log(formData)
       })
       .catch((err) => {
         console.log(err);
@@ -122,9 +120,8 @@ const Parent = ({formData, setForm, navigation }) => {
               value={formData.currentGroup.initialQuantity}
               onChange={handleChange}
             />
-            {console.log(formData)}
             <Button
-              mt={4} 
+              my={4} 
               variant='buttons.primary'
               type='submit'
               onClick={() => handleClick()}
