@@ -14,8 +14,7 @@ export class Footer extends Component {
           variant='text.footer' 
           sx={{
             textAlign: 'center',
-            pb: [2, 3, 4],
-            pl: [2, 3.5 ,5]
+            pb: [2, 3, 4]
           }}
         >
           &#169; 2021 signup | All rights reserved

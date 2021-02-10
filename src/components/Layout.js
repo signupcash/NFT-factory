@@ -16,7 +16,7 @@ export class Layout extends Component {
           sx={{
             display: 'flex',
             alignItems: 'left',
-            pt: [2, 3, 4],
+            py: [2, 3, 4],
             pl: [2, 3.5 ,5]
           }}
         >
