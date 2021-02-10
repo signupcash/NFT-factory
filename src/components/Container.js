@@ -11,15 +11,16 @@ const nftData = {
     ticker: '',
     name: '',
     image: '',
-    initialQuantity: 0,
+    initialQuantity: '',
   },
-  children: {               // children    ---- array group
-    ticker: '',
-    name: '',
-    groupName: '',        // disabled dropdown
-    image: '',
-    mintQuantity: ''
-  }
+  children: [
+    {               // children    ---- array group
+      ticker: '',
+      name: '',
+      image: '',
+      mintQuantity: ''
+    }
+  ]
 }
 
 const steps = [
@@ -31,12 +32,13 @@ const steps = [
 
 const Container = () => {
   const [formData, setForm] = useState(nftData);
+  const [childIdx, setChildIdx] = useState(0);
   const { step, navigation } = useStep({
     steps,
     initialStep: 0
   });
 
-  const props = { formData, setForm, navigation };
+  const props = { formData, setForm, childIdx, setChildIdx, navigation };
 
   switch(step.id) {
     case 'auth':

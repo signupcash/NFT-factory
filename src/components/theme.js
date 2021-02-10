@@ -4,14 +4,14 @@
     background: '#fff',
     primary: '#6D28D9',
     secondary: '#8B5CF6',
+    index: '#B291FE',
   },
   cards: {
     primary: {
-      position: 'relative',
       top: '20px',
       display: 'block',
       marginBottom: '80px',
-      width: ['75%','50%','25%'],
+      width: ['90%','75%','40%'],
       height: 'auto',
       borderColor: 'primary', 
       borderStyle: 'solid',
@@ -21,7 +21,6 @@
       alignItems: 'center',
     },
     secondary: {
-      position: 'relative',
       display: 'block',
       margin: '4%',
       borderColor: 'none',
@@ -29,6 +28,26 @@
       overflow: 'hidden',
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    nftIndex: {
+      display: 'flex',
+      margin: '4%',
+      borderColor: 'none',
+      borderStyle: 'none',
+      justifyContent: 'left',
+      alignItems: 'center',
+      backgroundColor: 'background',
+      '&:hover' : {
+        backgroundColor: 'index'
+      }
+    },
+    nftText: {
+      display: 'block',
+      marginLeft: '10px',
+      borderColor: 'none',
+      borderStyle: 'none',
+      overflow: 'hidden',
+      justifyContent: 'left',
     }
   },
   buttons: {
@@ -59,6 +78,7 @@
       height: ['20vw', '10vw'],
       width: '90%',
       margin: '0 auto',
+      marginBottom: 2,
       border: 'dotted',
       borderColor: 'text',
       '&:focus': {
@@ -109,10 +129,9 @@
       marginLeft: '5%',
     },
     select: {
-      display: 'inline-block',
       height: '40px',
       width: '90%',
-      margin: '0 auto',
+      marginLeft: '5%',
       border: 'groove',
       borderColor: 'text',
       '&:focus': {
@@ -133,7 +152,6 @@
       justifyContent: 'center',
       alignItems: 'center',
       minHeight: '100vh',
-      marginTop: '-6%'
     }
   },
   text: {
@@ -165,6 +183,62 @@
       color: 'text',
       fontSize: '4vw',
       textAlign: 'center'
+    },
+    h3: {
+      fontFamily: 'body',
+      fontWeight: 'bold',
+      color: 'text',
+      fontSize: '18px',
+      textAlign: 'left',
+      marginLeft: '10px'
+    },
+    h4: {
+      fontFamily: 'heading',
+      fontWeight: 'body',
+      color: 'text',
+      fontSize: '15px',
+      textAlign: 'left',
+      marginTop: '5px',
+      marginLeft: '10px'
+    },
+    progress: {
+      color: 'primary',
+      height: '10px',
+      width: '90%',
+      margin: '0 auto',
+    },
+    thumbsContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+      marginTop: 16
+    },
+    thumb: {
+      display: 'inline-flex',
+      borderRadius: 4,
+      border: '1px solid #6D28D9',
+      alignItems: 'center',
+      margin: '0 auto',
+      width: 100,
+      height: 100,
+      padding: 1,
+      boxSizing: 'border-box'
+    },
+    thumbInner: {
+      display: 'flex',
+      minWidth: 0,
+      overflow: 'hidden'
+    },
+    img: {
+      display: 'block',
+      width: 100,
+      height: 90
+    },
+    nftImg: {
+      display: 'block',
+      width: 100,
+      height: 100
     }
   }
 }
